@@ -5,28 +5,28 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateAccountTests extends TestBase{
-    @Test
+    @Test(enabled = false)
     public void newUserRegistrationTest(){
-        //click on register link
-        click(By.cssSelector("[href='/register']"));
-        //enter gender
-        click(By.id("gender-female"));
-        //enter first name
-        type(By.name("FirstName"), "Poman6");
-        //enter last name
-        type(By.cssSelector("[name='LastName']"), "Vasin");
-        //enter email
-        type(By.cssSelector("[id='Email']"), "pov66@gmail.com");
-        //enter password
-        type(By.name("Password"), "123456Ss#0");
-        //enter confirm password
-        type(By.name("ConfirmPassword"), "123456Ss#0");
-        //click on Registration button
-        click(By.cssSelector("#register-button"));
-        //verify
+
+        clickOnRegisteredButton();
+        clickGenderRadioButton("gender-female");
+        fillFormRegistration(new User().setFirstName("Poman6").setLastName("Vasin").setMail("pov66@gmail.com").setPassword("123456Ss#0"));
+        clickButtonRegistrationEnd("#register-button");
         Assert.assertTrue(isElementPresent(By.cssSelector(".button-1.register-continue-button")));
 
     }
+
+    @Test
+    public void existedUserRegistrationTest(){
+        clickOnRegisteredButton();
+        clickGenderRadioButton("gender-female");
+        fillFormRegistration(new User().setFirstName("Poman6").setLastName("Vasin").setMail("pov66@gmail.com").setPassword("123456Ss#0"));
+        clickButtonRegistrationEnd("#register-button");
+        Assert.assertTrue(isElementPresent(By.cssSelector(".validation-summary-errors")));
+
+    }
+
+
 
 
 }

@@ -43,4 +43,26 @@ public class TestBase {
     public void click(By locator) {
         driver.findElement(locator).click();
     }
+
+    public void clickButtonRegistrationEnd(String button) {
+        click(By.cssSelector(button));
+    }
+
+    public void fillFormRegistration(User user) {
+        type(By.name("FirstName"), user.getFirstName());
+        type(By.cssSelector("[name='LastName']"), user.getLastName());
+        type(By.cssSelector("[id='Email']"), user.getMail());
+        type(By.name("Password"), user.getPassword());
+        type(By.name("ConfirmPassword"), user.getPassword());
+    }
+
+    public void clickGenderRadioButton(String gender) {
+        click(By.id(gender));
+        //click(By.id("gender-male"));
+        // click(By.id("gender-female"));
+    }
+
+    public void clickOnRegisteredButton() {
+        clickButtonRegistrationEnd("[href='/register']");
+    }
 }
